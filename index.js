@@ -34,6 +34,7 @@ function calPasswordStrength(password){
     weaknessArr.push(uppercaseWeakness(password))
     weaknessArr.push(digitWeakness(password))
     weaknessArr.push(specialCharacterWeakness(password))
+    weaknessArr.push(repeatingCharacterWeakness(password))
     
     return weaknessArr
 }
@@ -44,7 +45,6 @@ function lengthWeakness(password){
 
     
     const length = password.trim().length 
-    console.log(length)
     if(length <= 8){
         return {
             message:'Your password is too Short',
@@ -115,4 +115,22 @@ function digitWeakness(password){
 function specialCharacterWeakness(password){
     const reg = /[^0-9a-zA-Z\s]/g
     return characterTypeWeakness(reg,password,'Special Character')
+}
+
+
+function repeatingCharacterWeakness(password){
+    const reg  = /(.)\1/g
+
+    const arr = password.match(reg)
+    
+    if(arr){
+        return {
+            message : 'Your Password has repeating Characters',
+            deduction : arr.length * 10
+        }
+    }
+    return {
+        message : "",
+        deduction : 0
+    }
 }

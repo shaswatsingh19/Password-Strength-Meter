@@ -17,6 +17,8 @@ body{
     border-radius: 20px;
     margin: 10px auto;
     position: relative;
+    
+    box-shadow: 0 0 calc(1px * var(--strength,0)) 0 hsl(19, 68%, 55%); ;
     overflow: hidden;
 }
 .meter::before{
